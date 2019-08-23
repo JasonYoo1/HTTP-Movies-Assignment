@@ -6,7 +6,7 @@ const initialMovie = {
     title: '',
     director: '',
     metascore: '',
-    stars: ''
+    stars: ['hello']
   };
 
   
@@ -18,6 +18,14 @@ const initialMovie = {
         setMovie({...movie, [event.target.name]: event.target.value})
     };
 
+    const handleThis = event => {
+     let value = event.target.value;
+     let name = event.target.name;
+     if (name === 'stars'){
+        movie.stars.push(value)
+     }   
+    }
+
     const handleSubmit = event =>{
         event.preventDefault();
         console.log(movie)
@@ -28,7 +36,6 @@ const initialMovie = {
             })
     }
 
-      
     return (
       <div>
         <h2>Update movie</h2>
@@ -74,7 +81,7 @@ const initialMovie = {
             type="text"
             value={movie.stars}
             name="stars"
-            onChange= {handleChange}
+            onChange= {handleThis}
             placeholder="stars"
           />
           <div className="baseline" />
