@@ -9,60 +9,76 @@ const initialMovie = {
     stars: ''
   };
 
+  
 
   const UpdateForm = (props) => {
     const [movie, setMovie] = useState(initialMovie);
+
+    const handleChange = event => {
+        setMovie({...movie, [event.target.name]: event.target.value})
+    };
+
+    const handleSubmit = event =>{
+        event.preventDefault();
+        console.log(movie)
+        axios
+            .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
+            .then(res =>{
+                console.log(res)
+            })
+    }
+
       
     return (
       <div>
         <h2>Update movie</h2>
-        {/* onSubmit={handleSubmit} */}
-        <form  >
+        <form  onSubmit = {handleSubmit}>
           <input
             type="text"
+            value={movie.id}
             name="id"
-            // onChange={this.changeHandler}
+            onChange= {handleChange}
             placeholder="id"
-            // value={this.movie.name}
           />
           <div className="baseline" />
   
           <input
-            type="number"
+            type="text"
+            value={movie.title}
             name="title"
-            // onChange={this.changeHandler}
+            onChange= {handleChange}
             placeholder="Title"
-            // value={this.movie.price}
+
           />
           <div className="baseline" />
   
           <input
             type="text"
+            value={movie.director}
             name="director"
-            // onChange={this.changeHandler}
+            onChange= {handleChange}
             placeholder="director"
-            // value={this.movie.imageUrl}
           />
           <div className="baseline" />
   
           <input
             type="text"
+            value={movie.metascore}
             name="metascore"
-            // onChange={this.changeHandler}
+            onChange= {handleChange}
             placeholder="metascore"
-            // value={this.movie.description}
           />
           <div className="baseline" />
   
           <input
             type="text"
+            value={movie.stars}
             name="stars"
-            // onChange={this.changeHandler}
+            onChange= {handleChange}
             placeholder="stars"
-            // value={this.movie.shipping}
           />
           <div className="baseline" />
-          <button className="md-button form-button">Update</button>
+          <button className="md-button form-button" type="submit" >Update</button>
         </form>
       </div>
  );
